@@ -13,7 +13,7 @@ public class Entry
             // validate that date is a DateTime object
             if (value.Kind != DateTimeKind.Local)
             {
-                throw new ArgumentException("Entry date must be Lovcal.");
+                throw new ArgumentException("Entry date must be Local.");
             }
             else
             {
@@ -70,4 +70,12 @@ public class Entry
         Console.WriteLine($"{date} - {_promptText}");
         Console.WriteLine($"{_userText}");
     }
+    
+    public string GetEntryString()
+    {
+        string date = _entryDate.ToString("dd/MM/yyyy");
+        string entryString = $"\"{date}\",\"{_promptText}\",\"{_userText}\"";
+        return entryString;
+    }
+    
 }

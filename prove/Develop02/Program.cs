@@ -1,4 +1,3 @@
-using System;
 using Develop02;
 
 class Program
@@ -19,7 +18,7 @@ class Program
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
             Console.WriteLine("5. Quit");
-            Console.WriteLine("What would you like to do? ");
+            Console.Write("What would you like to do? ");
             
             // Get user selection
             string userInput = Console.ReadLine();
@@ -28,48 +27,35 @@ class Program
             if (int.TryParse(userInput, out selection))
                 switch (selection)
                 {
-                    // prompt user and create new entry with their response
                     case 1:
+                        // prompt user and create new entry with their response
                         string promptText = promptGenerator.GeneratePrompt();
                         Console.WriteLine("");
                         Console.WriteLine(promptText);
                         Console.Write("> ");
                         string userText = Console.ReadLine();
-                        
                         journal.CreateEntry(DateTime.Now.Date, promptText, userText);
-
                         break;
-                    // display all entries in Journal
                     case 2:
+                        // display all entries in Journal
                         journal.Display();
                         break;
-                    // load journal entries saved to file given by user, and add to Journal
                     case 3:
-                        Console.Write("Please enter the file name: ");
-                        string fileName = Console.ReadLine();
-                        string[] lines = System.IO.File.ReadAllLines(fileName);
-
-                        foreach (string line in lines)
-                        {
-                            string[] parts = line.Split("|");
-
-                            string dateLoaded = parts[0];
-                            string promptLoaded = parts[1];
-                            string textLoaded = parts[2];
-                            journal.CreateEntry(promptLoaded, textLoaded);
-                        }
-                        
+                        // load journal entries from a file given by user
+                        journal.LoadFromFile();
                         break;
-                    // save journal entries to file given by user
                     case 4:
-                        Console.WriteLine("Saving");
+                        // save journal entries to file given by user
+                        Console.Write("Please enter the file name: ");
+                        string saveFileName = Console.ReadLine();
+                        journal.SaveToFile(saveFileName);
                         break;
-                    // quit program
                     case 5:
-                        Console.WriteLine("Enjoy your day!");
+                        // quit program
+                        Console.WriteLine("Thank you for using the Journal Program.");
                         break;
-                    // invalid user input
                     default:
+                        // invalid user input
                         Console.WriteLine("Invalid input. Please try again");
                         break;
                 }
