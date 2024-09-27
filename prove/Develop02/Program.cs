@@ -1,5 +1,7 @@
 using Develop02;
 
+// To exceed requirements, I have made saving and loading possible for .csv files (they can be opened in Excel),
+// I have used DateTime objects (converting to string and back), and I have implemented validation of user inputs.
 class Program
 {
     static void Main(string[] args)
