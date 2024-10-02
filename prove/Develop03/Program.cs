@@ -1,7 +1,8 @@
 using System;
 using Develop03;
 
-// I exceeded the requirements by including a library of scriptures / Scripture Book
+// I exceeded the requirements by including a library of scriptures / Scripture Book, the user can select
+// which scripture they wish to memorise. I also added a class for verses.
 class Program
 {
     static void Main(string[] args)

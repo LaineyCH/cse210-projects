@@ -36,7 +36,7 @@ public class Verse
         int numToRemove = 0;
         Random random = new Random();
         
-        // set a different number of word to remove dependent on how many words are shown
+        // set a different number of words to remove dependent on how many words are shown
         if (_wordsNotHidden > 25)
         {
             numToRemove = random.Next(3, 8);
@@ -54,7 +54,7 @@ public class Verse
             numToRemove = _wordsNotHidden;
         }
 
-        // if there are still word shown, remove words at random indexes. If the word at the random index was already
+        // if there are still words shown, remove words at random indexes. If the word at the random index was already
         // hidden, select the next word, continuing until an unhidden word is found (looping back to index 0 when the
         // end of the list is reached.
         if (_wordsNotHidden > 0)
