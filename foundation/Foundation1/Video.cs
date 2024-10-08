@@ -25,7 +25,7 @@ public class Video
         Console.WriteLine($"Title: {upperTitle}");
         Console.WriteLine($"Author: {_author}");
         Console.WriteLine($"Length (hh:mm:ss): {hours:D2}:{minutes:D2}:{seconds:D2}");
-        Console.WriteLine($"Number of Comments: {_comments.Count}");
+        Console.WriteLine($"Number of Comments: {NumComments()}");
         Console.WriteLine("Comments:");
         foreach (Comment c in _comments)
         {
@@ -37,5 +37,11 @@ public class Video
     {
         Comment newComment = new Comment(name, text);
         _comments.Add(newComment);
+    }
+    
+    public int NumComments()
+    {
+        int numberOfComments = _comments.Count;
+        return numberOfComments;
     }
 }
