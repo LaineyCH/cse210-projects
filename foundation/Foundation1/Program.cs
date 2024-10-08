@@ -23,8 +23,8 @@ class Program
         
         diagPouch.AddComment("@kathleenchamp3764", "\ud83d\ude0aHelllo Elaine.. WHAT A FUN BAG TO MAKE AND SHARE!!\n I just wanted to pop in and say Thank you ever so much !! This is a fabulous pattern. It was ever so kind of you to share. \nSo very thoughtful! I did try to send you a message in the download but it wasn't allowing me to. Thusly, I jumped right over to make sure you would get the note. \nThese days , especially, I think it is critical to let those who've taken the time in sharing of their time.. creativity. Doing a  tutorial let alone sharing the pattern, to know  that your thoughtfulness and kindness are not taken lightly.  It's greatly appreciated. And in fact it's blessed me and I have no doubts it will be a blessing to so many..  Thank You Again\ud83d\ude0a\nHave a delightful fall.. keep stitching \u263a");
         diagPouch.AddComment("@joycemonaco-olivas1483", "Could you speak up please");
-        diagPouch.AddComment("sewmama28", "Can I make this pouch bigger? I need one big enough to carry a rice pot.");
-        diagPouch.AddComment("nocomment321", "I can't download the pattern, please snd it to me.");
+        diagPouch.AddComment("@sewmama28", "Can I make this pouch bigger? I need one big enough to carry a rice pot.");
+        diagPouch.AddComment("@nocomment321", "I can't download the pattern, please send it to me.");
         
         videos.Add(howToDigitise);
         videos.Add(zipperJig);
