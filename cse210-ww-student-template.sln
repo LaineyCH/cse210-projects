@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prep3", "csharp-prep\Prep3\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prep4", "csharp-prep\Prep4\Prep4.csproj", "{AEC9BCFE-5FEA-49CE-9B55-6D524BC899FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adao", "sandbox\Adao\Adao.csproj", "{1D88B88E-14E1-4982-9258-F58DAFBF0728}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{AEC9BCFE-5FEA-49CE-9B55-6D524BC899FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEC9BCFE-5FEA-49CE-9B55-6D524BC899FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC9BCFE-5FEA-49CE-9B55-6D524BC899FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D88B88E-14E1-4982-9258-F58DAFBF0728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D88B88E-14E1-4982-9258-F58DAFBF0728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D88B88E-14E1-4982-9258-F58DAFBF0728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D88B88E-14E1-4982-9258-F58DAFBF0728}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +159,7 @@ Global
 		{96D39CDC-60FD-487A-ADE0-61DF94B0E19F} = {17D95707-7BD5-4BEB-9B50-FDB869C2F355}
 		{356C3AD6-ADB9-4850-8612-BB887E68F246} = {17D95707-7BD5-4BEB-9B50-FDB869C2F355}
 		{AEC9BCFE-5FEA-49CE-9B55-6D524BC899FF} = {17D95707-7BD5-4BEB-9B50-FDB869C2F355}
+		{1D88B88E-14E1-4982-9258-F58DAFBF0728} = {7F6D74C0-7996-48A8-BD52-0E7C6630273B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7ED701F-4ABF-4198-A4C6-B4931FB39A0E}
