@@ -2,7 +2,7 @@ namespace Develop05;
 
 public class Activity
 {
-    protected string _activityName = "Mindfulness Activity";
+    protected string _activityName;
     protected string _description;
     private int _duration = 0;
     private List<string> _animationStrings = new List<string>();
@@ -10,12 +10,12 @@ public class Activity
     // Getters & Setters
     protected int GetDuration() => _duration;
 
-    public void SetDuration(int duration)
+    private void SetDuration(int duration)
     {
         _duration = duration;
     }
 
-    public Activity()
+    protected Activity()
     {
         _animationStrings.Add("|");
         _animationStrings.Add("/");
@@ -27,7 +27,7 @@ public class Activity
         _animationStrings.Add("\\");
     }
 
-    public void GetReady()
+    protected void GetReady()
     {
         Console.Write("How long, in seconds, would you like for your session? ");
         string userTime = Console.ReadLine();
@@ -41,7 +41,7 @@ public class Activity
         Console.WriteLine("Get Ready...");
         DisplayAnimation(5);
     }
-    public void DisplayAnimation(int time)
+    protected void DisplayAnimation(int time)
     {
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(time);
@@ -61,7 +61,7 @@ public class Activity
         }
     }
 
-    public void DisplayCounter()
+    protected void DisplayCounter()
     {
         for (int i = 5; i > 0; i--)
         {
@@ -71,7 +71,7 @@ public class Activity
         }
     }
 
-    public void DisplayEndMessage()
+    protected void DisplayEndMessage()
     {
         Console.WriteLine($"Well done!!\nYou have completed another {_duration} seconds of the {_activityName}");
         DisplayAnimation(5);
