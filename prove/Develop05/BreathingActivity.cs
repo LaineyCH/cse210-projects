@@ -16,15 +16,22 @@ public class BreathingActivity : Activity
         
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(GetDuration());
-        int i = 0;
+        int time = 5;
+        if (GetDuration() < time * 2)
+        {
+            time = GetDuration();
+        }
         while (DateTime.Now < endTime)
         {
             Console.WriteLine("\n");
             Console.Write("Breathe in... ");
-            DisplayCounter();
+            DisplayCounter(time);
+            // Check if the time limit has been reached
+            if (DateTime.Now >= endTime)
+                break;
             Console.WriteLine(" ");
             Console.Write("And breathe out... ");
-            DisplayCounter();
+            DisplayCounter(time);
         }
         Console.WriteLine("\n");
         DisplayEndMessage();

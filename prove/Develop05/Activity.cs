@@ -4,7 +4,7 @@ public class Activity
 {
     protected string _activityName;
     protected string _description;
-    private int _duration = 0;
+    private int _duration = 60;
     private List<string> _animationStrings = new List<string>();
 
     // Getters & Setters
@@ -29,17 +29,20 @@ public class Activity
 
     protected void GetReady()
     {
-        Console.Write("How long, in seconds, would you like for your session? ");
+        Console.Write("How long, in seconds, would you like for your session? (max 60) ");
         string userTime = Console.ReadLine();
 
         // try to parse user input to integer
         if (int.TryParse(userTime, out int duration))
         {
-            SetDuration(duration);
+            if (duration <= 60)
+            {
+                SetDuration(duration);
+            }
         }
         Console.Clear();
         Console.WriteLine("Get Ready...");
-        DisplayAnimation(5);
+        DisplayAnimation(3);
     }
     protected void DisplayAnimation(int time)
     {
@@ -61,19 +64,22 @@ public class Activity
         }
     }
 
-    protected void DisplayCounter()
+    protected void DisplayCounter(int time)
     {
-        for (int i = 5; i > 0; i--)
+        for (int i = time; i > 0; i--)
         {
             Console.Write(i);
             Thread.Sleep(1000);
-            Console.Write("\b \b \b");
+            Console.Write("\b \b");
         }
     }
 
     protected void DisplayEndMessage()
     {
-        Console.WriteLine($"Well done!!\nYou have completed another {_duration} seconds of the {_activityName}");
+        Console.WriteLine("Well done!!");
+        DisplayAnimation(3);
+        Console.WriteLine(" ");
+        Console.WriteLine($"You have completed another {_duration} seconds of the {_activityName}");
         DisplayAnimation(5);
     }
 }
