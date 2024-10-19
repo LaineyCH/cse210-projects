@@ -3,6 +3,7 @@ namespace Develop05;
 public class ListingActivity : Activity
 {
     private List<string> _prompts = new List<string>();
+    private int _itemCount = 0;
     
     public ListingActivity() : base()
     {
@@ -53,13 +54,12 @@ public class ListingActivity : Activity
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(GetDuration());
         
-        int items = 0;
         while (DateTime.Now < endTime)
         {
             Console.Write("> ");
             Console.ReadLine();
-            items++;
+            _itemCount++;
         }
-        Console.WriteLine($"You listed {items} items!");
+        Console.WriteLine($"You listed {_itemCount} items!");
     }
 }
