@@ -10,20 +10,9 @@ public class Activity
     // Getters & Setters
     protected int GetDuration() => _duration;
 
-    public void SetDuration()
+    public void SetDuration(int duration)
     {
-        Console.Write("How long, in seconds, would you like for your session? ");
-        string userTime = Console.ReadLine();
-
-        // try to parse user input to integer
-        if (int.TryParse(userTime, out int duration))
-        {
-            _duration = duration;
-        }
-
-        Console.Clear();
-        Console.WriteLine("Get Ready");
-        DisplayAnimation(5);
+        _duration = duration;
     }
 
     public Activity()
@@ -38,6 +27,20 @@ public class Activity
         _animationStrings.Add("\\");
     }
 
+    public void GetReady()
+    {
+        Console.Write("How long, in seconds, would you like for your session? ");
+        string userTime = Console.ReadLine();
+
+        // try to parse user input to integer
+        if (int.TryParse(userTime, out int duration))
+        {
+            SetDuration(duration);
+        }
+        Console.Clear();
+        Console.WriteLine("Get Ready...");
+        DisplayAnimation(5);
+    }
     public void DisplayAnimation(int time)
     {
         DateTime startTime = DateTime.Now;

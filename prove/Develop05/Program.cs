@@ -5,12 +5,11 @@ class Program
 {
     static void Main(string[] args)
     {
-    Console.WriteLine("Welcome to the Mindfulness Program!");
-
         int selection = 0;
         while (selection != 4)
         {
             Console.Clear();
+            Console.WriteLine("MINDFULNESS PROGRAM");
             Console.WriteLine("");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Start Breathing Activity");

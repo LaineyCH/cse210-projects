@@ -12,8 +12,7 @@ public class BreathingActivity : Activity
     {
         Console.WriteLine(_description);
         Console.WriteLine(" ");
-        SetDuration();
-        Console.WriteLine(" ");
+        GetReady();
         
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(GetDuration());
@@ -23,10 +22,11 @@ public class BreathingActivity : Activity
             Console.WriteLine("\n");
             Console.Write("Breathe in... ");
             DisplayCounter();
-            Console.WriteLine("");
+            Console.WriteLine(" ");
             Console.Write("And breathe out... ");
             DisplayCounter();
         }
+        Console.WriteLine("\n");
         DisplayEndMessage();
     }
 }
