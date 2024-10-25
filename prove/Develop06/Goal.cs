@@ -17,6 +17,8 @@ public abstract class Goal
     {
         return Int32.Parse(_points);
     }
+    
+    public string GetName() => _name;
 
     protected virtual void CreateGoal()
     {
@@ -68,4 +70,6 @@ public abstract class Goal
     }
 
     public abstract bool IsComplete();
+
+    public abstract string GetStringRepresentation();
 }

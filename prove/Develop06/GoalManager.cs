@@ -11,7 +11,7 @@ public class GoalManager
         List<Goal> goals = new List<Goal>();
     }
 
-    private void DisplayPlayerInfo()
+    private void DisplayScore()
     {
         foreach (Goal g in goals)
         {
@@ -30,7 +30,7 @@ public class GoalManager
         int selection = 0;
         while (selection != 6)
         {
-            DisplayPlayerInfo();
+            DisplayScore();
             Console.WriteLine("");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
@@ -50,7 +50,7 @@ public class GoalManager
                 {
                     case 1:
                         Console.Clear();
-                        GoalMenu();
+                        CreateGoal();
                         break;
                     case 2:
                         Console.Clear();
@@ -66,7 +66,7 @@ public class GoalManager
                         break;
                     case 5:
                         Console.Clear();
-                        RecordEvent();
+                        ListGoalNames();
                         break;
                     case 6:
                         // quit program
@@ -79,5 +79,79 @@ public class GoalManager
                 }
         }
     }
-            
+
+    private void CreateGoal()
+    {
+        Console.WriteLine("");
+        Console.WriteLine("1. Simple Goal");
+        Console.WriteLine("2. Eternal Goal");
+        Console.WriteLine("3. Checklist Goal");
+        Console.Write("What type of goal would you like to create? ");
+        // Get user selection
+        string userInput = Console.ReadLine();
+        
+        Console.WriteLine("");
+        Console.WriteLine("What is the name of your goal?  ");
+        string goalName = Console.ReadLine();
+        Console.WriteLine("What is a short description of it?  ");
+        string description = Console.ReadLine();
+        Console.WriteLine("What is the amount of points associated with this goal?  ");
+        string points = Console.ReadLine();
+        
+        if (int.TryParse(userInput, out int selection))
+            switch (selection)
+            {
+                case 1:
+                    SimpleGoal sg = new SimpleGoal(goalName, description, points);
+                    break;
+                case 2:
+                    EternalGoal eg = new EternalGoal(goalName, description, points);
+                    break;
+                case 3:
+                    Console.WriteLine("How many times does this goal need to be accomplished for a bonus? ");
+                    string target = Console.ReadLine();
+                    Console.WriteLine("What is the bonus for accomplishing it that many times?  ");
+                    string bonus = Console.ReadLine();
+                    ChecklistGoal cg = new ChecklistGoal(goalName, description, points, target, bonus);
+                    break;
+            }
+    }
+
+    private void ListGoals()
+    {
+        foreach (Goal g in goals)
+        {
+            g.GetStringRepresentation();
+        }
+    }
+
+    private void SaveGoals()
+    {
+        foreach (Goal g in goals)
+        {
+            // save to file
+        }
+    }
+    
+    private void LoadGoals()
+    { 
+        // load from file
+    }
+
+    private void RecordEvent(Goal goal)
+    {
+        
+    }
+
+    private List<string> ListGoalNames()
+    {
+        List<string> goalNames = new List<string>();
+        foreach (Goal g in goals)
+        {
+            goalNames.Add(g.GetName());
+        }
+        
+        return goalNames;
+    }
+    
 }
