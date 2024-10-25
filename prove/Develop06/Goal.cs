@@ -1,6 +1,6 @@
 namespace Develop06;
 
-public class Goal
+public abstract class Goal
 {
     protected string _name;
     protected string _description;
@@ -11,6 +11,11 @@ public class Goal
         _name = name;
         _description = description;
         _points = points;
+    }
+
+    public int GetPoints()
+    {
+        return Int32.Parse(_points);
     }
 
     protected virtual void CreateGoal()
@@ -61,4 +66,6 @@ public class Goal
         Console.Write("What is the amount of points associated with it? ");
         if (int.TryParse(Console.ReadLine(), out points));
     }
+
+    public abstract bool IsComplete();
 }
