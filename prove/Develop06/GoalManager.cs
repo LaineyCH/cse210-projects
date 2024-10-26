@@ -62,18 +62,39 @@ public class GoalManager
                         break;
                     case 5:
                         string question5 = "Which goal did you accomplish? ";
-                        Goal selectedGoal = GoalSelect(question5);
-                        RecordAccomplishment(selectedGoal);
+                        try
+                        {
+                            Goal selectedGoal = GoalSelect(question5);
+                            RecordAccomplishment(selectedGoal);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please try again");
+                        }
                         break;
                     case 6:
                         string question6 = "Which goal would you like to reset to 'incomplete'? ";
-                        Goal resetGoal = GoalSelect(question6);
-                        ResetGoal(resetGoal);
+                        try
+                        {
+                            Goal resetGoal = GoalSelect(question6);
+                            ResetGoal(resetGoal);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please try again");
+                        }
                         break;
                     case 7:
                         string question7 = "Which goal would you like to delete? ";
-                        Goal deleteGoal = GoalSelect(question7);
-                        DeleteGoals(deleteGoal);
+                        try
+                        {
+                            Goal deleteGoal = GoalSelect(question7);
+                            DeleteGoals(deleteGoal);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please try again");
+                        }
                         break;
                     case 8:
                         // quit program
@@ -86,7 +107,6 @@ public class GoalManager
                 }
             DisplayScore();
         }
-        
     }
 
     private void CreateGoal()
@@ -101,6 +121,12 @@ public class GoalManager
 
         if (int.TryParse(userInput, out int selection))
         {
+            if (selection > _goals.Count)
+            {
+                // invalid user input
+                Console.WriteLine("Invalid input. Please try again");
+                return;
+            }
             Console.WriteLine("");
             Console.WriteLine("What is the name of your goal?  ");
             string goalName = Console.ReadLine();
@@ -242,10 +268,18 @@ public class GoalManager
             Console.WriteLine($"{i}. {name}");
             i++;
         }
-        Console.Write("Which goal did you accomplish? ");
+
+        Console.Write(question);
         string userInput = Console.ReadLine();
         if (int.TryParse(userInput, out int selection))
+        {
+            if (selection > _goals.Count)
+            {
+                // invalid user input
+                throw new FormatException("Invalid input. Please try again.");
+            }
             return _goals[selection - 1];
+        }
         else
         {
             throw new FormatException("Invalid input. Please try again.");
