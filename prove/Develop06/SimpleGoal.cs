@@ -1,8 +1,9 @@
 namespace Develop06;
 
-public class SimpleGoal(string name, string description, string points): Goal(name, description, points)
+public class SimpleGoal(string name, string description, string points, bool isComplete = false): Goal(name, description, points)
 {
-    private bool _isComplete = false;
+    private bool _isComplete = isComplete;
+    
     public override bool IsComplete()
     {
         return _isComplete;
@@ -16,6 +17,7 @@ public class SimpleGoal(string name, string description, string points): Goal(na
 
     public override string GetStringRepresentation()
     {
-        throw new NotImplementedException();
+        // string format: goal type, name, description, points
+        return $"SimpleGoal({GetName()}, {GetDescription()}, {GetPoints()}, {IsComplete()})";
     }
 }

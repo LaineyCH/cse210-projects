@@ -14,6 +14,7 @@ public class EternalGoal(string name, string description, string points): Goal(n
 
     public override string GetStringRepresentation()
     {
-        return name + ", " + description + ", " + points;
+        // string format: goal type | name, description, points
+        return $"EternalGoal({GetName()}, {GetDescription()}, {GetPoints()})";
     }
 }

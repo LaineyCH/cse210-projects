@@ -84,16 +84,16 @@ public class GoalManager
         Console.Write("What type of goal would you like to create? ");
         // Get user selection
         string userInput = Console.ReadLine();
-        
-        Console.WriteLine("");
-        Console.WriteLine("What is the name of your goal?  ");
-        string goalName = Console.ReadLine();
-        Console.WriteLine("What is a short description of it?  ");
-        string description = Console.ReadLine();
-        Console.WriteLine("What is the amount of points associated with this goal?  ");
-        string points = Console.ReadLine();
-        
+
         if (int.TryParse(userInput, out int selection))
+        {
+            Console.WriteLine("");
+            Console.WriteLine("What is the name of your goal?  ");
+            string goalName = Console.ReadLine();
+            Console.WriteLine("What is a short description of it?  ");
+            string description = Console.ReadLine();
+            Console.WriteLine("What is the amount of points associated with this goal?  ");
+            string points = Console.ReadLine();
             switch (selection)
             {
                 case 1:
@@ -113,10 +113,16 @@ public class GoalManager
                     _goals.Add(cg);
                     break;
             }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please try again");
+        }
     }
 
     private void ListGoals()
     {
+        Console.WriteLine("GOALS:");
         int i = 1;
         foreach (Goal g in _goals)
         {

@@ -42,7 +42,8 @@ public class ChecklistGoal(string name, string description, string points, strin
 
     public override string GetStringRepresentation()
     {
-        return GetName();
+        // string format: goal type, name, description, points
+        return $"ChecklistGoal, {GetName()}, {GetDescription()}, {GetPoints()}, {_target}, {_bonus}";
     }
     
     public override string GetDetailsString()
