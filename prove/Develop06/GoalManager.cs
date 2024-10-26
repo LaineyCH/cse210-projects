@@ -29,7 +29,6 @@ public class GoalManager
         int selection = 0;
         while (selection != 8)
         {
-            DisplayScore();
             Console.WriteLine("");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
@@ -85,7 +84,9 @@ public class GoalManager
                         Console.WriteLine("Invalid input. Please try again");
                         break;
                 }
+            DisplayScore();
         }
+        
     }
 
     private void CreateGoal()
@@ -139,6 +140,7 @@ public class GoalManager
 
     private void ListGoals()
     {
+        Console.WriteLine(" ");
         Console.WriteLine("GOALS:");
         int i = 1;
         foreach (Goal g in _goals)
