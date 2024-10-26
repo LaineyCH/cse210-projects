@@ -125,6 +125,10 @@ public class GoalManager
                     ChecklistGoal cg = new ChecklistGoal(goalName, description, points, target, bonus);
                     _goals.Add(cg);
                     break;
+                default:
+                    // invalid user input
+                    Console.WriteLine("Invalid input. Please try again");
+                    break;
             }
         }
         else
@@ -151,6 +155,7 @@ public class GoalManager
         string filename = Console.ReadLine();
         using (StreamWriter sw = new StreamWriter(filename))
         {
+            sw.WriteLine(_score);
             foreach (Goal g in _goals)
             {
                 sw.WriteLine(g.GetStringRepresentation());
@@ -169,10 +174,16 @@ public class GoalManager
             {
                 using (StreamReader sr = new StreamReader(readFileName))
                 {
+                    // read the first line and parse it as the score
+                    if (int.TryParse(sr.ReadLine(), out int parsedScore))
+                    {
+                        _score = parsedScore;
+                    }
+                    
                     // clear the goals list
                     _goals.Clear();
                     string line;
-                    // ead from file and parse one line at a time
+                    // read the rest of the file one line at a time, and parse
                     while ((line = sr.ReadLine()) != null)
                     {
                         string[] parts = line.Split(",");
