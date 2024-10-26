@@ -1,5 +1,6 @@
 namespace Develop06;
 
+// abstract superclass for various goal subclasses, can not itself be instantiated
 public abstract class Goal
 {
     private string _name;
@@ -34,7 +35,6 @@ public abstract class Goal
     public abstract void Reset();
 
     // virtual methods - provides a generic method that can be overridden by subclasses
-    
     public virtual void GetGoalDetails()
     {
         string name;
@@ -58,5 +58,4 @@ public abstract class Goal
         // string format: [x] Name (Description)
         return $"[{check}] {GetName()} ({GetDescription()})";
     }
-    
 }

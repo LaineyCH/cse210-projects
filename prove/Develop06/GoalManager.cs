@@ -5,27 +5,17 @@ public class GoalManager
     private List<Goal> _goals;
     private int _score;
 
+    // constructor
     public GoalManager()
     {
         _score = 0;
         _goals = new List<Goal>();
     }
 
-    private void DisplayScore()
-    {
-        foreach (Goal g in _goals)
-        {
-            if (g.IsComplete())
-            {
-                g.GetPoints();
-            }
-        }
-        Console.WriteLine("");
-        Console.WriteLine($"You have {_score} points.");
-    }
-    
+    // methods
     public void Start()
     {
+        // display main menu options
         int selection = 0;
         while (selection != 8)
         {
@@ -49,18 +39,29 @@ public class GoalManager
                 switch (selection)
                 {
                     case 1:
+                        // let the user create a new goal
                         CreateGoal();
                         break;
                     case 2:
+                        // list all the goals in the list of goals
                         ListGoals();
                         break;
                     case 3:
+                        // save the score and the list of goals to a user specified file (overrides any existing data)
                         SaveGoals();
                         break;
                     case 4:
+                        // load score and list of goals from user specifoed file (overrides the existing goal list)
                         LoadGoals();
                         break;
                     case 5:
+                        // check is goal list is empty
+                        if (_goals.Count == 0)
+                        {
+                            Console.WriteLine("There are no goals in your list.");
+                            break;
+                        }
+                        // let the user mark a goal as accomplished and award the relevant score
                         string question5 = "Which goal did you accomplish? ";
                         try
                         {
@@ -73,6 +74,13 @@ public class GoalManager
                         }
                         break;
                     case 6:
+                        // check is goal list is empty
+                        if (_goals.Count == 0)
+                        {
+                            Console.WriteLine("There are no goals in your list.");
+                            break;
+                        }
+                        // reset an existing goal to incomplete (eternal goals will reset to zero tasks completed)
                         string question6 = "Which goal would you like to reset to 'incomplete'? ";
                         try
                         {
@@ -85,6 +93,13 @@ public class GoalManager
                         }
                         break;
                     case 7:
+                        // check is goal list is empty
+                        if (_goals.Count == 0)
+                        {
+                            Console.WriteLine("There are no goals in your list.");
+                            break;
+                        }
+                        // let the user remove/delete a chosen goal from the list of goals
                         string question7 = "Which goal would you like to delete? ";
                         try
                         {
@@ -108,7 +123,15 @@ public class GoalManager
             DisplayScore();
         }
     }
+    
+    // display the score
+    private void DisplayScore()
+    {
+        Console.WriteLine("");
+        Console.WriteLine($"You have {_score} points.");
+    }
 
+    // create a new user defined goal object and add it to the list of goals
     private void CreateGoal()
     {
         Console.WriteLine("");
@@ -164,6 +187,7 @@ public class GoalManager
         }
     }
 
+    // display the list of goals in a numbered list showing completion status
     private void ListGoals()
     {
         Console.WriteLine(" ");
@@ -177,6 +201,7 @@ public class GoalManager
         }
     }
 
+    // save score and list of goals to a user specified txt file
     private void SaveGoals()
     {
         Console.Write("Please enter the file name: ");
@@ -191,6 +216,7 @@ public class GoalManager
         }
     }
     
+    // load score and list of goals from user specified txt file
     private void LoadGoals()
     { 
         bool fileOpened = false;
@@ -250,6 +276,7 @@ public class GoalManager
         }
     }
 
+    // update completion status for goal object and add points awarded to score
     private void RecordAccomplishment(Goal goal)
     {
         int points = goal.RecordAccomplishment();
@@ -258,6 +285,7 @@ public class GoalManager
         Console.WriteLine($"You now have {_score} points.");
     }
 
+    // returns a user specified goal object from the list of goals
     private Goal GoalSelect(string question = "Which goal?")
     {
         Console.WriteLine("");
@@ -286,11 +314,13 @@ public class GoalManager
         }
     }
 
+    // resets completion status of goal object to incomplete
     private void ResetGoal(Goal goal)
     {
         goal.Reset();
     }
 
+    // removes/deletes a goal object from he list of goals
     private void DeleteGoals(Goal goal)
     {
         _goals.Remove(goal);
