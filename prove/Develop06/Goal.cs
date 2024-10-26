@@ -2,61 +2,38 @@ namespace Develop06;
 
 public abstract class Goal
 {
-    protected string _name;
-    protected string _description;
-    protected string _points;
+    private string _name;
+    private string _description;
+    private string _points;
 
+    // constructor
     protected Goal(string name, string description, string points)
     {
         _name = name;
         _description = description;
         _points = points;
     }
+    
+    // getters and setters
+    public string GetName() => _name;
+    
+    protected string GetDescription() => _description;
 
     public int GetPoints()
     {
-        return Int32.Parse(_points);
+        return int.Parse(_points);
     }
     
-    public string GetName() => _name;
+    // abstract methods - must be implemented in subclasses
+    public abstract bool IsComplete();
 
-    protected virtual void CreateGoal()
-    {
-        int selection = 0;
+    public abstract string GetStringRepresentation();
+    
+    public abstract int RecordAccomplishment();
 
-        Console.WriteLine("");
-        Console.WriteLine("1. Simple Goal:");
-        Console.WriteLine("2. Eternal Goals");
-        Console.WriteLine("3. Checklist Goals");
-        Console.Write("Which type of goal would you like to create? ");
-
-        // Get user selection
-        string userInput = Console.ReadLine();
-
-        // try to parse user input to integer
-        if (int.TryParse(userInput, out selection))
-            switch (selection)
-            {
-                case 1:
-                    Console.Clear();
-                    
-                    break;
-                case 2:
-                    Console.Clear();
-
-                    break;
-                case 3:
-                    Console.Clear();
-
-                    break;
-                default:
-                    // invalid user input
-                    Console.WriteLine("Invalid input. Please try again");
-                    break;
-            }
-    }
-
-    protected virtual void GetGoalDetails()
+    // virtual methods - provides a generic method that can be overridden by subclasses
+    
+    public virtual void GetGoalDetails()
     {
         string name;
         string description;
@@ -69,7 +46,15 @@ public abstract class Goal
         if (int.TryParse(Console.ReadLine(), out points));
     }
 
-    public abstract bool IsComplete();
-
-    public abstract string GetStringRepresentation();
+    public virtual string GetDetailsString()
+    {
+        string check = " ";
+        if (IsComplete())
+        {
+            check = "x";
+        }
+        // string format: [x] Name (Description)
+        return $"[{check}] {GetName()} ({GetDescription()})";
+    }
+    
 }

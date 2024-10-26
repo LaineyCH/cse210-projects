@@ -7,4 +7,15 @@ public class SimpleGoal(string name, string description, string points): Goal(na
     {
         return _isComplete;
     }
+
+    public override int RecordAccomplishment()
+    {
+        _isComplete = true;
+        return GetPoints();
+    }
+
+    public override string GetStringRepresentation()
+    {
+        throw new NotImplementedException();
+    }
 }

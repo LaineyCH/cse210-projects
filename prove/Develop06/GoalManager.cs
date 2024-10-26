@@ -2,24 +2,23 @@ namespace Develop06;
 
 public class GoalManager
 {
-    private List<Goal> goals;
+    private List<Goal> _goals;
     private int _score;
 
     public GoalManager()
     {
         _score = 0;
-        List<Goal> goals = new List<Goal>();
+        _goals = new List<Goal>();
     }
 
     private void DisplayScore()
     {
-        foreach (Goal g in goals)
+        foreach (Goal g in _goals)
         {
             if (g.IsComplete())
             {
                 g.GetPoints();
             }
-            
         }
         Console.WriteLine("");
         Console.WriteLine($"You have {_score} points.");
@@ -37,7 +36,7 @@ public class GoalManager
             Console.WriteLine("2. List Goals");
             Console.WriteLine("3. Save Goals");
             Console.WriteLine("4. Load Goals");
-            Console.WriteLine("5. Record Event");
+            Console.WriteLine("5. Record Accomplished Goal");
             Console.WriteLine("6. Quit");
             Console.Write("Select a choice from the menu: ");
             
@@ -49,24 +48,20 @@ public class GoalManager
                 switch (selection)
                 {
                     case 1:
-                        Console.Clear();
                         CreateGoal();
                         break;
                     case 2:
-                        Console.Clear();
                         ListGoals();
                         break;
                     case 3:
-                        Console.Clear();
                         SaveGoals();
                         break;
                     case 4:
-                        Console.Clear();
                         LoadGoals();
                         break;
                     case 5:
-                        Console.Clear();
-                        ListGoalNames();
+                        Goal selectedGoal = GoalSelect();
+                        RecordAccomplishment(selectedGoal);
                         break;
                     case 6:
                         // quit program
@@ -103,9 +98,11 @@ public class GoalManager
             {
                 case 1:
                     SimpleGoal sg = new SimpleGoal(goalName, description, points);
+                    _goals.Add(sg);
                     break;
                 case 2:
                     EternalGoal eg = new EternalGoal(goalName, description, points);
+                    _goals.Add(eg);
                     break;
                 case 3:
                     Console.WriteLine("How many times does this goal need to be accomplished for a bonus? ");
@@ -113,23 +110,27 @@ public class GoalManager
                     Console.WriteLine("What is the bonus for accomplishing it that many times?  ");
                     string bonus = Console.ReadLine();
                     ChecklistGoal cg = new ChecklistGoal(goalName, description, points, target, bonus);
+                    _goals.Add(cg);
                     break;
             }
     }
 
     private void ListGoals()
     {
-        foreach (Goal g in goals)
+        int i = 1;
+        foreach (Goal g in _goals)
         {
-            g.GetStringRepresentation();
+            string goalString = g.GetDetailsString();
+            Console.WriteLine($"{i}. {goalString}");
+            i++;
         }
     }
 
     private void SaveGoals()
     {
-        foreach (Goal g in goals)
+        foreach (Goal g in _goals)
         {
-            // save to file
+            g.GetStringRepresentation();
         }
     }
     
@@ -138,20 +139,32 @@ public class GoalManager
         // load from file
     }
 
-    private void RecordEvent(Goal goal)
+    private void RecordAccomplishment(Goal goal)
     {
-        
+        int points = goal.RecordAccomplishment();
+        Console.WriteLine($"Congratulations! You have earned {points} points!");
+        _score += points;
+        Console.WriteLine($"You now have {_score} points.");
     }
 
-    private List<string> ListGoalNames()
+    private Goal GoalSelect()
     {
-        List<string> goalNames = new List<string>();
-        foreach (Goal g in goals)
+        Console.WriteLine("");
+        int i = 1;
+        foreach (Goal g in _goals)
         {
-            goalNames.Add(g.GetName());
+            string name = g.GetName();
+            Console.WriteLine($"{i}. {name}");
+            i++;
         }
-        
-        return goalNames;
+        Console.Write("Which goal did you accomplish? ");
+        string userInput = Console.ReadLine();
+        if (int.TryParse(userInput, out int selection))
+            return _goals[selection - 1];
+        else
+        {
+            throw new FormatException("Invalid input. Please try again.");
+        }
     }
     
 }
