@@ -1,8 +1,8 @@
 namespace Develop06;
 
-public class ChecklistGoal(string name, string description, string points, string target, string bonus) : Goal(name, description, points)
+public class ChecklistGoal(string name, string description, string points, string target, string bonus, string amountComplete = "0") : Goal(name, description, points)
 {
-    private int _amountComplete = 0;
+    private int _amountComplete = int.Parse(amountComplete);
     private int _target = int.Parse(target);
     private int _bonus = int.Parse(bonus);
     public override bool IsComplete()
@@ -43,7 +43,7 @@ public class ChecklistGoal(string name, string description, string points, strin
     public override string GetStringRepresentation()
     {
         // string format: goal type, name, description, points
-        return $"ChecklistGoal, {GetName()}, {GetDescription()}, {GetPoints()}, {_target}, {_bonus}";
+        return $"ChecklistGoal, {GetName()}, {GetDescription()}, {GetPoints()}, {_target}, {_bonus}, {_amountComplete}";
     }
     
     public override string GetDetailsString()
@@ -55,5 +55,10 @@ public class ChecklistGoal(string name, string description, string points, strin
         }
         // string format: [x] Name (Description) -- Currently completed 0/3
         return $"[{check}] {GetName()} ({GetDescription()}) -- Currently completed {_amountComplete}/{target}";
+    }
+    
+    public override void Reset()
+    {
+        _amountComplete = 0;
     }
 }

@@ -17,4 +17,8 @@ public class EternalGoal(string name, string description, string points): Goal(n
         // string format: goal type | name, description, points
         return $"EternalGoal, {GetName()}, {GetDescription()}, {GetPoints()}";
     }
+    
+    public override void Reset()
+    {
+    }
 }

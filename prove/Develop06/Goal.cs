@@ -30,6 +30,8 @@ public abstract class Goal
     public abstract string GetStringRepresentation();
     
     public abstract int RecordAccomplishment();
+    
+    public abstract void Reset();
 
     // virtual methods - provides a generic method that can be overridden by subclasses
     

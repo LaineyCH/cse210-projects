@@ -20,4 +20,9 @@ public class SimpleGoal(string name, string description, string points, bool isC
         // string format: goal type, name, description, points
         return $"SimpleGoal, {GetName()}, {GetDescription()}, {GetPoints()}, {IsComplete()}";
     }
+
+    public override void Reset()
+    {
+        _isComplete = false;
+    }
 }

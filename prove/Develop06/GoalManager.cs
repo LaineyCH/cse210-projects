@@ -27,7 +27,7 @@ public class GoalManager
     public void Start()
     {
         int selection = 0;
-        while (selection != 6)
+        while (selection != 8)
         {
             DisplayScore();
             Console.WriteLine("");
@@ -37,7 +37,9 @@ public class GoalManager
             Console.WriteLine("3. Save Goals");
             Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Accomplished Goal");
-            Console.WriteLine("6. Quit");
+            Console.WriteLine("6. Reset Goal Completion");
+            Console.WriteLine("7. Delete Goal");
+            Console.WriteLine("8. Quit");
             Console.Write("Select a choice from the menu: ");
             
             // Get user selection
@@ -60,10 +62,21 @@ public class GoalManager
                         LoadGoals();
                         break;
                     case 5:
-                        Goal selectedGoal = GoalSelect();
+                        string question5 = "Which goal did you accomplish? ";
+                        Goal selectedGoal = GoalSelect(question5);
                         RecordAccomplishment(selectedGoal);
                         break;
                     case 6:
+                        string question6 = "Which goal would you like to reset to 'incomplete'? ";
+                        Goal resetGoal = GoalSelect(question6);
+                        ResetGoal(resetGoal);
+                        break;
+                    case 7:
+                        string question7 = "Which goal would you like to delete? ";
+                        Goal deleteGoal = GoalSelect(question7);
+                        DeleteGoals(deleteGoal);
+                        break;
+                    case 8:
                         // quit program
                         Console.WriteLine("Thank you.");
                         break;
@@ -147,12 +160,11 @@ public class GoalManager
     
     private void LoadGoals()
     { 
-        string readFileName = "";
         bool fileOpened = false;
         while (!fileOpened)
         {
             Console.Write("Please enter the file name: ");
-            readFileName = Console.ReadLine();
+            string readFileName = Console.ReadLine();
             try
             {
                 using (StreamReader sr = new StreamReader(readFileName))
@@ -164,14 +176,14 @@ public class GoalManager
                     while ((line = sr.ReadLine()) != null)
                     {
                         string[] parts = line.Split(",");
-                        string goalType = parts[0].Trim('"');
-                        string name = parts[1].Trim('"');
-                        string description = parts[2].Trim('"');
-                        string points = parts[3].Trim('"');
+                        string goalType = parts[0].Trim();
+                        string name = parts[1].Trim();
+                        string description = parts[2].Trim();
+                        string points = parts[3].Trim();
                         switch (goalType)
                         {
                             case "SimpleGoal":
-                                bool isComplete = bool.Parse(parts[4].Trim('"'));
+                                bool isComplete = bool.Parse(parts[4].Trim());
                                 SimpleGoal sg = new SimpleGoal(name, description, points, isComplete);
                                 _goals.Add(sg);
                                 break;
@@ -180,9 +192,10 @@ public class GoalManager
                                 _goals.Add(eg);
                                 break;
                             case "ChecklistGoal":
-                                string target = parts[4].Trim('"');
-                                string bonus = parts[5].Trim('"');
-                                ChecklistGoal cg = new ChecklistGoal(name, description, points, target, bonus);
+                                string target = parts[4].Trim();
+                                string bonus = parts[5].Trim();
+                                string amountComplete = parts[6].Trim();
+                                ChecklistGoal cg = new ChecklistGoal(name, description, points, target, bonus, amountComplete);
                                 _goals.Add(cg);
                                 break;
                         }
@@ -206,7 +219,7 @@ public class GoalManager
         Console.WriteLine($"You now have {_score} points.");
     }
 
-    private Goal GoalSelect()
+    private Goal GoalSelect(string question = "Which goal?")
     {
         Console.WriteLine("");
         int i = 1;
@@ -224,6 +237,16 @@ public class GoalManager
         {
             throw new FormatException("Invalid input. Please try again.");
         }
+    }
+
+    private void ResetGoal(Goal goal)
+    {
+        goal.Reset();
+    }
+
+    private void DeleteGoals(Goal goal)
+    {
+        _goals.Remove(goal);
     }
     
 }
