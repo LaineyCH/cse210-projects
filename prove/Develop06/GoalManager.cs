@@ -134,15 +134,68 @@ public class GoalManager
 
     private void SaveGoals()
     {
-        foreach (Goal g in _goals)
+        Console.Write("Please enter the file name: ");
+        string filename = Console.ReadLine();
+        using (StreamWriter sw = new StreamWriter(filename))
         {
-            g.GetStringRepresentation();
+            foreach (Goal g in _goals)
+            {
+                sw.WriteLine(g.GetStringRepresentation());
+            }
         }
     }
     
     private void LoadGoals()
     { 
-        // load from file
+        string readFileName = "";
+        bool fileOpened = false;
+        while (!fileOpened)
+        {
+            Console.Write("Please enter the file name: ");
+            readFileName = Console.ReadLine();
+            try
+            {
+                using (StreamReader sr = new StreamReader(readFileName))
+                {
+                    // clear the goals list
+                    _goals.Clear();
+                    string line;
+                    // ead from file and parse one line at a time
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(",");
+                        string goalType = parts[0].Trim('"');
+                        string name = parts[1].Trim('"');
+                        string description = parts[2].Trim('"');
+                        string points = parts[3].Trim('"');
+                        switch (goalType)
+                        {
+                            case "SimpleGoal":
+                                bool isComplete = bool.Parse(parts[4].Trim('"'));
+                                SimpleGoal sg = new SimpleGoal(name, description, points, isComplete);
+                                _goals.Add(sg);
+                                break;
+                            case "EternalGoal":
+                                EternalGoal eg = new EternalGoal(name, description, points);
+                                _goals.Add(eg);
+                                break;
+                            case "ChecklistGoal":
+                                string target = parts[4].Trim('"');
+                                string bonus = parts[5].Trim('"');
+                                ChecklistGoal cg = new ChecklistGoal(name, description, points, target, bonus);
+                                _goals.Add(cg);
+                                break;
+                        }
+
+                    }
+                    fileOpened = true;
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("File not found, please try again.");
+            }
+        }
     }
 
     private void RecordAccomplishment(Goal goal)
