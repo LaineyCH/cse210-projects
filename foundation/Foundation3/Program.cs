@@ -5,8 +5,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        // create a new list for activities
         List<Activity> activities = new List<Activity>();
 
+        // create instances of the various activity subclasses and add them to the list
         RunningActivity r1 = new RunningActivity("03 Nov 2022", 30, 3.0);
         activities.Add(r1);
         CyclingActivity c1 = new CyclingActivity("08 Nov 2022", 125, 22.3);
@@ -20,6 +22,7 @@ class Program
         SwimmingActivity s2 = new SwimmingActivity("15 Dec 2022", 23, 24);
         activities.Add(s2);
 
+        // go through the list of activities and print the summaries
         foreach (Activity activity in activities)
         {
             Console.WriteLine(activity.Summary());
