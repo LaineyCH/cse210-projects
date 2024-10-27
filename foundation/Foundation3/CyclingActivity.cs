@@ -7,19 +7,19 @@ public class CyclingActivity(string date, double lengthOfActivity, double speed)
     public override double CalcDistance()
     {
         // returns distance in km
-        return Math.Round(_speed * (GetLengthOfActivity() / 60), 1);
+        return Math.Round(_speed * (GetLengthOfActivity() / 60), 2);
     }
 
     public override double CalcSpeed()
     {
         // returns the speed in km/h
-        return Math.Round(_speed, 1);
+        return Math.Round(_speed, 2);
     }
 
     // returns the pace in min per km
     public override double CalcPace()
     {
-        return Math.Round((60 / _speed), 1);
+        return Math.Round((60 / _speed), 2);
     }
     
     public override string GetActivityType()
