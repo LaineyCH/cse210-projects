@@ -1,7 +1,7 @@
 using System;
 using Develop06;
 
-// I have exceeded requirements in th efollowing ways:
+// I have exceeded requirements in the following ways:
 // 1. Eternal Goals, once they have been completed, if the user records another accomplishment, it resets and allows
 //    the user to start again (points already awarded are retained).
 // 2. The user can reset any goal so that it becomes incomplete (eternal goals reset to 0 tasks completed).

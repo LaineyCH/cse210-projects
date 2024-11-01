@@ -144,7 +144,7 @@ public class GoalManager
 
         if (int.TryParse(userInput, out int selection))
         {
-            if (selection > _goals.Count)
+            if (selection is not (1 or 2 or 3))
             {
                 // invalid user input
                 Console.WriteLine("Invalid input. Please try again");
